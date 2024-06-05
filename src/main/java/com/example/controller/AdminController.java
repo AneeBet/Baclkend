@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +27,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -58,6 +60,13 @@ public class AdminController {
 		//return Optional.ofNullable(as.deleteCustomer(id).orElseThrow(()->new ResourceNotFoundException("Customer id not found "+ id)) );  
 		as.deleteCustomer(id);
 	}
+	
+	@PutMapping("/updatecustomer/{id}")
+	public Customer updateCustomer(@PathVariable int id,@RequestBody Customer custNew) throws ResourceNotFoundException {
+		 Optional.ofNullable(as.getCustomer(id).orElseThrow(()->new ResourceNotFoundException("Customer id not found "+ id)) );
+	return as.updateCustomer(id, custNew);
+	}
+	
 	
 
 	

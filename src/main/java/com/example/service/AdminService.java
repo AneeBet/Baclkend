@@ -71,6 +71,26 @@ public class AdminService {
 		return id;
 	}
 	
+	public Customer updateCustomer( int id, Customer custNew) {
+		Optional<Customer> custOld = cr.findById(id);
+	
+	     custOld.get().setName(custNew.getName());
+	     custOld.get().setAddress(custNew.getAddress());
+	     custOld.get().setAge(custNew.getAge());
+	     custOld.get().setBalance(custNew.getBalance());
+	     custOld.get().setEmail(custNew.getEmail());
+	     custOld.get().setPassword(custNew.getPassword());
+	     custOld.get().setPhone(custNew.getPhone());
+	     custOld.get().setSSN(custNew.getSSN());
+	     custOld.get().setUsername(custNew.getUsername());
+	   
+	     
+	     return cr.save(custOld.get());
+	
+	}
+    
+
+	
 
 	
 	
